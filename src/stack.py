@@ -7,7 +7,12 @@ class Node:
 
         :param data: данные, которые будут храниться в узле
         """
-        pass
+        self.data = data
+        self.next_node = next_node
+
+    @classmethod
+    def overlap(cls, data, next_node):
+        return cls(data, next_node)
 
 
 class Stack:
@@ -15,7 +20,7 @@ class Stack:
 
     def __init__(self):
         """Конструктор класса Stack"""
-        pass
+        self.stack_list = []
 
     def push(self, data):
         """
@@ -23,7 +28,11 @@ class Stack:
 
         :param data: данные, которые будут добавлены на вершину стека
         """
-        pass
+        if len(self.stack_list) == 0:
+            data = Node.overlap(data, None)
+        else:
+            data = Node.overlap(data, self.stack_list[-1])
+        self.stack_list.append(data)
 
     def pop(self):
         """
@@ -31,4 +40,14 @@ class Stack:
 
         :return: данные удаленного элемента
         """
-        pass
+        if len(self.stack_list) == 0:
+            return None
+        removed = self.stack_list.pop()
+        return removed
+
+    @property
+    def top(self):
+        if len(self.stack_list) == 0:
+            return None
+        else:
+            return self.stack_list[-1]
