@@ -14,8 +14,8 @@ class TestAll(unittest.TestCase):
         self.assertEqual(n2.data, 'a')
         self.assertEqual(n1, n2.next_node)
 
-    def test_overlap(self):
-        n3 = Node.overlap('b', n2)
+    def test_assigning(self):
+        n3 = Node.assigning('b', n2)
         self.assertEqual(n3.data, 'b')
         self.assertEqual(n3.next_node, n2)
 
@@ -34,13 +34,15 @@ class TestAll(unittest.TestCase):
         self.assertEqual(test_stack.stack_list[-1].next_node.data, 'dataA')
 
         with self.assertRaises(AttributeError):
-            test_stack.stack_list[-1].next_node.next_node.data
+            print(test_stack.stack_list[-1].next_node.next_node.data)
+
+        test_stack.stack_list.clear()
 
     def test_pop(self):
         self.assertEqual(test_stack.pop(), None)
 
         test_stack.push('dataC')
-        self.assertEqual(test_stack.pop().data, 'dataC')
+        self.assertEqual(test_stack.pop(), 'dataC')
         self.assertEqual(test_stack.stack_list, [])
 
     def test_top(self):
@@ -54,4 +56,4 @@ class TestAll(unittest.TestCase):
         self.assertEqual(test_stack.top.next_node.next_node.next_node, None)
 
         with self.assertRaises(AttributeError):
-            test_stack.top.next_node.next_node.next_node.data
+            print(test_stack.top.next_node.next_node.next_node.data)
